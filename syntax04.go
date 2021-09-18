@@ -3,19 +3,28 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"time" //시간 관련 패키지(seed 생성용)
+	"time"
 )
 
+//난수 추출된 수의 소수 판정 프로그램 v0.1
+//소수 : 약수가 1과 자기 자신뿐인 수 (0,1은 제외)
 func main() {
-	//seed 설정(난수 사용 시 seed설정이 필요하다.)
-	seed := time.Now().Unix() //unix 기준 현재 시간을 얻는 명령어
+	seed := time.Now().Unix()
 	rand.Seed(seed)
 
-	//number:=rand.Intn(6)  //0부터 ()안에 숫자 사이에 랜덤 숫자가 나온다.
-	// dice := rand.Intn(6)
-	// fmt.Println(dice)
-	for i := 1; i < 6; i++ { //6번 난수를 출력
-		dice := rand.Intn(6) + 1
-		fmt.Println(dice)
+	count := 0
+	number := rand.Intn(150) + 2 //0과 1 제외, 2~151 사이의 수
+	fmt.Println("임의로 추출된 수:", number)
+
+	for i := 1; i <= number; i++ {
+		if number%i == 0 {
+			count++
+		}
+	}
+
+	if count == 2 {
+		fmt.Println(number, "는(은) 소수입니다.")
+	} else {
+		fmt.Println(number, "는(은) 소수가 아닙니다.")
 	}
 }
